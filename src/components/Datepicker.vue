@@ -1,35 +1,52 @@
 <template>
-  <div>
-    <p>Starting date: {{ removeTime(dateRange.start) }}</p>
-    <p>End date: {{ removeTime(dateRange.end) }}</p>
-    <v-date-picker v-model="dateRange" is-range />
+  <div class="calendarContainer">
+    <p>
+      Starting date:
+      <span id="startDateTag">{{ dateFormat(dateRange.start) }}</span>
+    </p>
+    <p>
+      End date: <span id="endDateTag">{{ dateFormat(dateRange.end) }}</span>
+    </p>
+    <v-date-picker v-model="dateRange" is-range is-expanded />
   </div>
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex';
+import dateFormat from '@/utils/dateFormat';
+
 export default {
   data() {
     return {
       dateRange: {
-        start: new Date(),
-        end: this.setDefaultEndDate(new Date()),
+        start: this.dateRanges().start,
+        end: this.setDefaultEndDate(this.dateRanges().end),
       },
     };
   },
   methods: {
-    removeTime(d) {
-      console.log(d);
-      const date = new Date(d);
-      date.setHours(0, 0, 0, 0);
-      return date.toDateString();
-    },
+    ...mapMutations(['setDateRange']),
+    ...mapGetters(['dateRanges']),
+    dateFormat,
     setDefaultEndDate(d) {
-      const today = new Date();
-      d.setDate(today.getDate() + 16);
+      d.setDate(d.getDate() + 16);
       return d;
+    },
+  },
+  watch: {
+    dateRange() {
+      this.setDateRange(this.dateRange);
     },
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+p {
+  font-weight: bold;
+  text-align: left;
+}
+.calendarContainer {
+  margin-top: 50px;
+}
+</style>

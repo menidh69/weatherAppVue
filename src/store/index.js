@@ -7,6 +7,10 @@ export default createStore({
     weatherData: null,
     currentUnit: 'M',
     selectedCity: cities[0],
+    rangeDates: {
+      start: new Date(),
+      end: new Date(),
+    },
     cities,
   },
   mutations: {
@@ -18,6 +22,9 @@ export default createStore({
     },
     setSelectedCity(state, city) {
       state.selectedCity = city;
+    },
+    setDateRange(state, payload) {
+      state.rangeDates = payload;
     },
   },
   actions: {
@@ -42,6 +49,9 @@ export default createStore({
     },
     cities(state) {
       return state.cities;
+    },
+    dateRanges(state) {
+      return state.rangeDates;
     },
   },
   modules: {},

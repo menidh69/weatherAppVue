@@ -1,10 +1,13 @@
 <template>
   <div>
-    <select name="cities" id="citySelector" v-model="currentCity">
-      <option v-for="city in cities()" :value="city" :key="city.name">{{
-        city.name
-      }}</option>
-    </select>
+    <div class="selectGroup">
+      <p>City:</p>
+      <select name="cities" id="citySelector" v-model="currentCity">
+        <option v-for="city in cities()" :value="city" :key="city.name">{{
+          city.name
+        }}</option>
+      </select>
+    </div>
   </div>
 </template>
 
@@ -31,4 +34,13 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+.selectGroup {
+  width: 100%;
+  text-align: left;
+  font-weight: bold;
+  select {
+    width: 100%;
+  }
+}
+</style>

@@ -7,14 +7,17 @@
       </div>
       <div>
         <CitySelector />
-        <select
-          name="temperatureScale"
-          id="tempSelector"
-          v-model="selectedTemp"
-        >
-          <option value="M">Celsius</option>
-          <option value="I">Fahrenheit</option>
-        </select>
+        <div class="selectGroup">
+          <p>Scale:</p>
+          <select
+            name="temperatureScale"
+            id="tempSelector"
+            v-model="selectedTemp"
+          >
+            <option value="M">Celsius</option>
+            <option value="I">Fahrenheit</option>
+          </select>
+        </div>
         <Datepicker />
       </div>
     </div>
@@ -65,5 +68,13 @@ export default {
   grid-template-columns: 70% 25%;
   grid-template-rows: auto;
   grid-gap: 5%;
+  padding: 75px 150px;
+}
+@media screen and (max-width: 1000px) {
+  #mainDashboard {
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+    padding: 75px 25px;
+  }
 }
 </style>

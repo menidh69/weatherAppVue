@@ -11,6 +11,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import dateFormat from '@/utils/dateFormat';
 
 const options = {
   dataLabels: {
@@ -48,7 +49,10 @@ export default {
               align: 'left',
             },
             subtitle: {
-              text: 'Dates',
+              text: this.dateRanges
+                ? `${dateFormat(this.dateRanges.start)} -  
+                ${dateFormat(this.dateRanges.end)}`
+                : '',
               align: 'left',
             },
             xaxis: {
@@ -72,6 +76,7 @@ export default {
       }
       return null;
     },
+    ...mapGetters(['dateRanges']),
   },
 };
 </script>
